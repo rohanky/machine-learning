@@ -1,5 +1,8 @@
 # preprocessing/text_processing.py
 import re
+import nltk
+nltk.download('punkt_tab')
+nltk.download('wordnet')
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -31,6 +34,7 @@ def apply_text_processing(data, text_column):
     """
     Apply the text preprocessing function to the given text column in the DataFrame.
     """
+    data = data.drop(columns=["Unnamed: 0"], errors='ignore')
     data[text_column] = data[text_column].apply(preprocess_text)
     return data
 
